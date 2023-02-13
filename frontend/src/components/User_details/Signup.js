@@ -46,7 +46,7 @@ const Signup = () => {
     <div className="sign_container">
       <div className="sign_form">
         <form method="POST">
-          <h1  className="h1">Sign-In</h1>
+          <h1  className="h1">Register</h1>
           <div className="form_data">
             <label htmlFor='name' className="label">Name</label>
             <input type="text" name="name" id="name" onChange={adddata} value={udata.name}/>
