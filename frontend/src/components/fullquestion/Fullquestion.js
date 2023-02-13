@@ -9,10 +9,19 @@ import {useNavigate} from "react-router-dom"
 
 const Fullquestion = ({date}) => {
     const history = useNavigate();
+    const {_id} =useParams("");
+console.log(_id);
+
+const [show,setShow] = useState(false);
+const setshow =()=>{
+    setShow(!show)
+    setquesid(_id);
+}
+//
      
 
     const [answerdata,answerUdata] = useState({
-        questionid:"",answer:""
+        answer:""
       });
       
       // console.log(answerdata);
@@ -26,10 +35,16 @@ const Fullquestion = ({date}) => {
   
           })
       }
-      
+      const [quesid,setquesid] = useState({questionid:""})
+
+      console.log(quesid);
       const senddata = async (e) =>{
         e.preventDefault();
-        const {answer,questionid} =answerdata;
+        
+        const {answer} =answerdata;
+        console.log(answer);
+        const questionid =quesid;
+        console.log(questionid);
   
         const res = await fetch("https://mini-stack-overflow.onrender.com/postanswer",{
           method:"POST",
@@ -43,7 +58,7 @@ const Fullquestion = ({date}) => {
       alert("fill all field");
     }else{
       alert("answer added successfully");
-      answerUdata({...answerdata,questionid:'',answer:''})
+      answerUdata({...answerdata,answer:''})
       history(`/postanswer/${fullquestion._id}`);
     }
       }
@@ -52,9 +67,7 @@ const Fullquestion = ({date}) => {
  // api call to fullquestion/:_id
  const [fullquestion,setFullquestion] = useState([]);
  console.log(fullquestion);
-const {_id} =useParams("");
-console.log(_id);
-//
+
 
 
 const getfullquestion = async()=>{
@@ -81,7 +94,6 @@ getfullquestion();
 
 
 
-    const [show,setShow] = useState(false);
     return (
         <>
         
@@ -93,7 +105,6 @@ getfullquestion();
         
                 <NavLink to="/addquestion"><button>Ask Question</button></NavLink>
             </div>
-            <p style={{color:"red"}}>Question Id :{fullquestion._id}</p>
             <div className='all-questions'>
                 <div className='all-question-container'>
                     <div className='qanda'>
@@ -111,9 +122,8 @@ getfullquestion();
                             <div className='answer-posting'>
                                 
                               <NavLink to={`/postanswer/${fullquestion._id}`}><button style={{marginTop:"20px",marginLeft:"35"}}>See All Answer</button></NavLink>
-                        <p>please provide question id here and answer the question  :</p>
-                    <input classname="questionid" name="questionid" onChange={adddata} value={answerdata.questionid}></input>
-                    <p onClick={()=>setShow(!show)}>Click Here to Answer the question</p>
+                
+                    <p onClick={setshow}>Click Here to Answer the question</p>
                     {
                         show && (
                                 <div className='title3'>
