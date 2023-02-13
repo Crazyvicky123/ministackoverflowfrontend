@@ -24,7 +24,7 @@ const Question = () => {
         e.preventDefault();
         const {title,desc,tags} =udata;
   
-        const res = await fetch("https://mini-stack-overflow.onrender.com/allaskquestion",{
+        const res = await fetch("https://mini-stack-overflow.onrender.com/askquestion",{
           method:"POST",
           headers:{"Content-Type":"application/json"},
           body:JSON.stringify({title,desc,tags})
