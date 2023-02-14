@@ -34,7 +34,7 @@ const senddata = async (e) =>{
   });
 
   const data = await res.json();
-  if(!data || res.status === 400)
+  if(!data || res.status == 400)
   {
     alert("invalid details");
   }
